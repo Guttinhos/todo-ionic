@@ -1,20 +1,25 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title> TODO </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-list>
+    <ion-item-sliding *ngFor="let task of tasks">
+      <ion-item (click)="openActions(task)">
+        <ion-label>{{task.name}}</ion-label>
+        <ion-icon slot="start" name="radio-button-off" *ngIf="!task.done"></ion-icon>
+        <ion-icon slot="start" name="checkmark-circle" color="success" *ngIf="task.done"></ion-icon>
+      </ion-item>
+      <ion-item-options side="start">
+        <ion-item-option color="danger" (click)="delete(task)">Excluir</ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" >
+    <ion-fab-button name="add" (click)="showAdd()" color="medium">
+      <ion-icon  name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
